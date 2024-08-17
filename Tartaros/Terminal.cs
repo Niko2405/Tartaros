@@ -12,6 +12,8 @@ namespace Tartaros
 		{
 			string? command;
 			Console.Clear();
+			Console.Title = "Tartaros - Terminal";
+
 			while (true)
 			{
 				Console.SetCursorPosition(0, Console.WindowHeight - 1);
@@ -28,16 +30,26 @@ namespace Tartaros
 				}
 			}
 		}
+
 		public static void Timeout(int seconds)
 		{
-			using (var progress = new ProgressBar())
+			Console.CursorVisible = false;
+			Console.Write("Waiting... ");
+			for (int i = 0; i <= seconds; i++)
 			{
-				for (int i = 0; i <= seconds; i++)
+				Console.Write(i);
+				Thread.Sleep(1000);
+				if (i >= 10)
 				{
-					progress.Report((double)i / 100);
-					Thread.Sleep(100);
+					Console.SetCursorPosition(Console.CursorLeft - 2, Console.CursorTop);
+				}
+				else if (i <= 9)
+				{
+					Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
 				}
 			}
+			Console.CursorVisible = true;
+			Console.WriteLine();
 		}
 	}
 }

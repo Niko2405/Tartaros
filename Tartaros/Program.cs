@@ -8,11 +8,15 @@
 			{
 
 			}
-			// init
+
+			#region INIT
 			Init.BuildFilesystem();
+			ConfigHandler.Init();
+			Init.CheckCommunications();
+			Init.CheckCryptAndEncryption();
+			#endregion
 
-			Terminal.Timeout(5000);
-
+			Terminal.Timeout(5);
 			Terminal.Run();
 		}
 	}

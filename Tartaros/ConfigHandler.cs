@@ -24,7 +24,7 @@ namespace Tartaros
 		public static readonly string CONFIG_FILE = DIR_CONFIGS + "config.json";
 
 		// etc
-		public static readonly string CRYPT_PASSWORD = "Test123";
+		//public static readonly string CRYPT_PASSWORD = "Test123";
 		public static readonly string DATAFILE_EXTENTION = ".dat";
 
 		public static ConfigObject? currentConfig;
@@ -36,7 +36,6 @@ namespace Tartaros
 		{
 			if (!File.Exists(CONFIG_FILE))
 			{
-
 				try
 				{
 					File.WriteAllText(CONFIG_FILE, JsonSerializer.Serialize(new ConfigObject(), JsonOptions));
@@ -44,7 +43,7 @@ namespace Tartaros
 				}
 				catch (UnauthorizedAccessException)
 				{
-					Logger.PrintStatus("No access to create config file at " + CONFIG_FILE, Logger.StatusCode.FAILED);
+					Logger.PrintStatus("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.FAILED);
 					Environment.Exit(1);
 				}
 			}
@@ -69,7 +68,7 @@ namespace Tartaros
 			}
 			catch (UnauthorizedAccessException)
 			{
-				Logger.PrintStatus("No access to create config file at " + CONFIG_FILE, Logger.StatusCode.FAILED);
+				Logger.PrintStatus("No permission to create config file at " + CONFIG_FILE, Logger.StatusCode.FAILED);
 				Environment.Exit(1);
 			}
 		}
@@ -79,10 +78,17 @@ namespace Tartaros
 		/// </summary>
 		public class ConfigObject
 		{
+			public string ServerListenInterface { get; set; } = "127.0.0.1";
+			public int ServerListenPort { get; set; } = 8080;
+
 			public string SerialControlModulePortName { get; set; } = "COM1";
 			public int SerialControlModuleBaudrate { get; set; } = 9600;
 			public int SerialControlModuleStopBits { get; set; } = 1;
 			public int SerialControlModuleDataBits { get; set; } = 8;
+			public int SerialControlModuleReadTimeout { get; set; } = 500;
+			public int SerialControlModuleWriteTimeout { get; set; } = 500;
+
+			public string CryptKey { get; set; } = System.Environment.MachineName;
 		}
 	}
 }
