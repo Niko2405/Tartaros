@@ -50,8 +50,71 @@ namespace Tartaros
 
 		public static void CheckCryptAndEncryption()
 		{
+			var random = new Random();
+			const int TESTS = 500;
+			int failCounter = 0;
+			long[] buffer = new long[TESTS];
+
 			// Direct (stdout)
+			Logger.PrintStatus("Test SHA512 (stdout)", Logger.StatusCode.INFO);
+			for (int i = 0; i < TESTS; i++)
+			{
+				buffer[i] = random.NextInt64(long.MaxValue / 2, long.MaxValue);
+			}
+			Logger.PrintStatus($"Filling the buffer: {TESTS}", Logger.StatusCode.OK);
+
+			for (int i = 0; i < buffer.Length; i++)
+			{
+				string xCrypted = Crypting.Encrypt(buffer[i].ToString());
+				string xEncrypted = Crypting.Decrypt(xCrypted);
+				Logger.PrintStatus($"[STDOUT] SHA512 Test seq. [{i + 1}/{TESTS}]\t\tOriginal Value: {buffer[i]}\tCrypted Value: {xCrypted}\tEncrypted Value: {xEncrypted}", Logger.StatusCode.OK);
+
+				if (buffer[i].ToString() != xEncrypted)
+				{
+					failCounter++;
+					Logger.PrintStatus($"Crypt Overflow: Len Original Value:{buffer[i].ToString().Length}\tLen Encrypted Value: {xEncrypted.Length}", Logger.StatusCode.FAILED);
+				}
+			}
+			Logger.PrintStatus($"Rusult: [{failCounter} / {TESTS}] failed", Logger.StatusCode.INFO);
+			Logger.PrintStatus("Test SHA512 (stdout)", Logger.StatusCode.OK);
+			Terminal.Timeout(3);
+
 			// Indirect (file)
+			Logger.PrintStatus("Test SHA512 (file)", Logger.StatusCode.INFO);
+			failCounter = 0;
+			try
+			{
+				for (int i = 0; i < buffer.Length; i++)
+				{
+					// save values in file
+					File.WriteAllText(ConfigHandler.DIR_TEMP + "originalValues.txt", buffer[i].ToString());
+
+					// read file random numbers => crypting => save as new file 
+					string xCrypted = Crypting.Encrypt(File.ReadAllText(ConfigHandler.DIR_TEMP + "originalValues.txt"));
+					File.WriteAllText(ConfigHandler.DIR_TEMP + "cryptedValues.txt", xCrypted);
+
+					// read crypted data => encrypt values => compare values with or the original
+					string xEncrypted = Crypting.Decrypt(File.ReadAllText(ConfigHandler.DIR_TEMP + "cryptedValues.txt"));
+
+					Logger.PrintStatus($"[FILE] SHA512 Test seq. [{i + 1}/{TESTS}]\t\tOriginal Value: {buffer[i]}\tCrypted Value: {xCrypted}\tEncrypted Value: {xEncrypted}", Logger.StatusCode.OK);
+					if (buffer[i].ToString() != xEncrypted)
+					{
+						failCounter++;
+						Logger.PrintStatus($"Crypt Overflow: Len Original Value:{buffer[i].ToString().Length}\tLen Encrypted Value: {xEncrypted.Length}", Logger.StatusCode.FAILED);
+					}
+					Thread.Sleep(1);
+				}
+				Logger.PrintStatus($"Rusult: [{failCounter} / {TESTS}] failed", Logger.StatusCode.INFO);
+				Logger.PrintStatus("Test SHA512 (file)", Logger.StatusCode.OK);
+			}
+			catch (Exception)
+			{
+				Logger.PrintStatus("Test SHA512 (file)", Logger.StatusCode.FAILED);
+			}
+
+			// cleanup
+			File.Delete(ConfigHandler.DIR_TEMP + "originalValues.txt");
+			File.Delete(ConfigHandler.DIR_TEMP + "cryptedValues.txt");
 		}
 	}
 }

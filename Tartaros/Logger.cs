@@ -57,7 +57,6 @@ namespace Tartaros
 				default:
 					break;
 			}
-			Thread.Sleep(250);
 		}
 	}
 }

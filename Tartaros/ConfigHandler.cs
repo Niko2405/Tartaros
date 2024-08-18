@@ -89,6 +89,8 @@ namespace Tartaros
 			public int SerialControlModuleWriteTimeout { get; set; } = 500;
 
 			public string CryptKey { get; set; } = System.Environment.MachineName;
+			public int CryptIterations { get; set; } = 25000;
+			public string CryptSaltNew { get; set; } = "TestSalt";
 		}
 	}
 }

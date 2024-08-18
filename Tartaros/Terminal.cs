@@ -34,8 +34,8 @@ namespace Tartaros
 		public static void Timeout(int seconds)
 		{
 			Console.CursorVisible = false;
-			Console.Write("Waiting... ");
-			for (int i = 0; i <= seconds; i++)
+			Console.Write("\nWaiting... ");
+			for (int i = seconds; i >= 0; i--)
 			{
 				Console.Write(i);
 				Thread.Sleep(1000);

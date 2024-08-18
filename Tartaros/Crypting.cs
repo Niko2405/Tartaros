@@ -9,7 +9,7 @@ namespace Tartaros
 {
 	internal class Crypting
 	{
-		public static readonly byte[] SALT = [45, 12, 60, 51, 73, 7, 84, 97];
+		//public static readonly byte[] SALT = [45, 12, 60, 51, 73, 7, 84, 97];
 		public static readonly byte[] IV = new byte[16];
 
 		/// <summary>
@@ -80,10 +80,13 @@ namespace Tartaros
 		/// <returns>Key for en-decryping</returns>
 		public static byte[] CreateKey(string password, int keyBytes = 32)
 		{
-			const int Iterations = 100000;
-			var keyGenerator = Rfc2898DeriveBytes.Pbkdf2(password, SALT, Iterations, HashAlgorithmName.SHA512, keyBytes);
-
-			return keyGenerator;
+			if (ConfigHandler.currentConfig != null)
+			{
+				var keyGenerator = Rfc2898DeriveBytes.Pbkdf2(password, Encoding.UTF8.GetBytes(ConfigHandler.currentConfig.CryptSaltNew), ConfigHandler.currentConfig.CryptIterations, HashAlgorithmName.SHA512, keyBytes);
+				return keyGenerator;
+			}
+			Logger.PrintStatus("[SHA512] Create key", Logger.StatusCode.FAILED);
+			return [];
 		}
 
 		public static bool CheckEncoding(string value, Encoding encoding)
