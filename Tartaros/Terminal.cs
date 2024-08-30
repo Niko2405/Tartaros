@@ -27,6 +27,7 @@ namespace Tartaros
 						Logger.PrintStatus("shutdown...", Logger.StatusCode.INFO);
 						Environment.Exit(0);
 					}
+					Console.WriteLine(CommandHandler.ProcessCommand(command));
 				}
 			}
 		}

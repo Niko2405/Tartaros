@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Tartaros": {
+      "commandName": "Project",
+      "commandLineArgs": "--skipTestModule"
+    }
+  }
+}

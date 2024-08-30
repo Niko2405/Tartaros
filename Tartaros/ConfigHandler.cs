@@ -50,10 +50,10 @@ namespace Tartaros
 			currentConfig = JsonSerializer.Deserialize<ConfigObject>(File.ReadAllText(CONFIG_FILE), JsonOptions);
 			if (currentConfig == null)
 			{
-				Logger.PrintStatus("Deserialize config", Logger.StatusCode.FAILED);
+				Logger.PrintStatus("Reading config", Logger.StatusCode.FAILED);
 				return;
 			}
-			Logger.PrintStatus("Deserialize config", Logger.StatusCode.OK);
+			Logger.PrintStatus("Reading config", Logger.StatusCode.OK);
 		}
 
 		/// <summary>
