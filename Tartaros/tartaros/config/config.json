@@ -1,0 +1,13 @@
+{
+  "ServerListenInterface": "127.0.0.1",
+  "ServerListenPort": 8080,
+  "SerialControlModulePortName": "COM1",
+  "SerialControlModuleBaudrate": 9600,
+  "SerialControlModuleStopBits": 1,
+  "SerialControlModuleDataBits": 8,
+  "SerialControlModuleReadTimeout": 500,
+  "SerialControlModuleWriteTimeout": 500,
+  "CryptKey": "laptop",
+  "CryptIterations": 25000,
+  "CryptSaltNew": "TestSalt"
+}

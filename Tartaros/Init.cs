@@ -55,8 +55,8 @@ namespace Tartaros
 			int failCounter = 0;
 			long[] buffer = new long[TESTS];
 
-			// Direct (stdout)
-			Logger.PrintStatus("Test SHA512 (stdout)", Logger.StatusCode.INFO);
+			// Direct (internal)
+			Logger.PrintStatus("Test SHA512 (internal)", Logger.StatusCode.INFO);
 			for (int i = 0; i < TESTS; i++)
 			{
 				buffer[i] = random.NextInt64(long.MaxValue / 2, long.MaxValue);
@@ -67,7 +67,7 @@ namespace Tartaros
 			{
 				string xCrypted = Crypting.Encrypt(buffer[i].ToString());
 				string xEncrypted = Crypting.Decrypt(xCrypted);
-				Logger.PrintStatus($"[STDOUT] SHA512 Test seq. [{i + 1}/{TESTS}]\t\tOriginal Value: {buffer[i]}\tCrypted Value: {xCrypted}\tEncrypted Value: {xEncrypted}", Logger.StatusCode.OK);
+				Logger.PrintStatus($"[internal] SHA512 Test seq. [{i + 1}/{TESTS}]\t\tOriginal Value: {buffer[i]}\tCrypted Value: {xCrypted}\tEncrypted Value: {xEncrypted}", Logger.StatusCode.OK);
 
 				if (buffer[i].ToString() != xEncrypted)
 				{
@@ -76,11 +76,11 @@ namespace Tartaros
 				}
 			}
 			Logger.PrintStatus($"Rusult: [{failCounter} / {TESTS}] failed", Logger.StatusCode.INFO);
-			Logger.PrintStatus("Test SHA512 (stdout)", Logger.StatusCode.OK);
+			Logger.PrintStatus("Test SHA512 (internal)", Logger.StatusCode.OK);
 			Terminal.Timeout(3);
 
 			// Indirect (file)
-			Logger.PrintStatus("Test SHA512 (file)", Logger.StatusCode.INFO);
+			Logger.PrintStatus("Test SHA512 (external)", Logger.StatusCode.INFO);
 			failCounter = 0;
 			try
 			{
@@ -96,7 +96,7 @@ namespace Tartaros
 					// read crypted data => encrypt values => compare values with or the original
 					string xEncrypted = Crypting.Decrypt(File.ReadAllText(ConfigHandler.DIR_TEMP + "cryptedValues.txt"));
 
-					Logger.PrintStatus($"[FILE] SHA512 Test seq. [{i + 1}/{TESTS}]\t\tOriginal Value: {buffer[i]}\tCrypted Value: {xCrypted}\tEncrypted Value: {xEncrypted}", Logger.StatusCode.OK);
+					Logger.PrintStatus($"[external] SHA512 Test seq. [{i + 1}/{TESTS}]\t\tOriginal Value: {buffer[i]}\tCrypted Value: {xCrypted}\tEncrypted Value: {xEncrypted}", Logger.StatusCode.OK);
 					if (buffer[i].ToString() != xEncrypted)
 					{
 						failCounter++;
@@ -105,11 +105,11 @@ namespace Tartaros
 					Thread.Sleep(1);
 				}
 				Logger.PrintStatus($"Rusult: [{failCounter} / {TESTS}] failed", Logger.StatusCode.INFO);
-				Logger.PrintStatus("Test SHA512 (file)", Logger.StatusCode.OK);
+				Logger.PrintStatus("Test SHA512 (external)", Logger.StatusCode.OK);
 			}
 			catch (Exception)
 			{
-				Logger.PrintStatus("Test SHA512 (file)", Logger.StatusCode.FAILED);
+				Logger.PrintStatus("Test SHA512 (external)", Logger.StatusCode.FAILED);
 			}
 
 			// cleanup

@@ -21,10 +21,10 @@
 			#region INIT
 			Console.Title = "Tartaros - Init";
 			Init.BuildFilesystem();
-			Thread.Sleep(2000);
+			Thread.Sleep(1000);
 
 			ConfigHandler.Init();
-			Thread.Sleep(2000);
+			Thread.Sleep(1000);
 			#endregion
 
 			#region TEST
@@ -38,7 +38,7 @@
 			}
 			#endregion
 
-			Terminal.Timeout(5);
+			Terminal.Timeout(3);
 			Terminal.Run();
 		}
 	}
