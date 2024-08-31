@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tartaros.Communication
 {
-	internal class SerialPortCom
+	internal class SerialPortConnection
 	{
 		private static bool locked = false;
 		private static SerialPort? serialPort;
@@ -41,6 +41,7 @@ namespace Tartaros.Communication
 					catch (Exception ex)
 					{
 						Logger.PrintStatus(ex.Message, Logger.StatusCode.INFO);
+						Logger.PrintStatus("SerialPortCom", Logger.StatusCode.FAILED);
 					}
 				}
 			}
@@ -87,9 +88,14 @@ namespace Tartaros.Communication
 						serialPort.Close();
 						locked = false;
 					}
+					catch (TimeoutException)
+					{
+						return string.Empty;
+					}
 					catch (Exception ex)
 					{
 						Logger.PrintStatus(ex.Message, Logger.StatusCode.INFO);
+						Logger.PrintStatus("SerialPortCom", Logger.StatusCode.FAILED);
 					}
 				}
 				return response;

@@ -11,11 +11,12 @@ namespace Tartaros
 		public static void Run()
 		{
 			string? command;
-			Console.Clear();
 			Console.Title = "Tartaros - Terminal";
+			Console.Clear();
 
 			while (true)
 			{
+				Console.Title = "Tartaros - Terminal";
 				Console.SetCursorPosition(0, Console.WindowHeight - 1);
 				Console.Write('>');
 				command = Console.ReadLine();
@@ -35,7 +36,8 @@ namespace Tartaros
 		public static void Timeout(int seconds)
 		{
 			Console.CursorVisible = false;
-			Console.Write("\nWaiting... ");
+			Console.SetCursorPosition(0, Console.WindowHeight - 1);
+			Console.Write("Loading... ");
 			for (int i = seconds; i >= 0; i--)
 			{
 				Console.Write(i);

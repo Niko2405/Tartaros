@@ -37,7 +37,7 @@ namespace Tartaros
 		{
 			// Serial
 			Logger.PrintStatus("Test serial communication module", Logger.StatusCode.INFO);
-			string response = Communication.SerialPortCom.SendDataAndRecv("ping");
+			string response = Communication.SerialPortConnection.SendDataAndRecv("ping");
 			if (response != "pong")
 			{
 				Logger.PrintStatus("Serial communication module", Logger.StatusCode.FAILED);

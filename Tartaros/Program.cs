@@ -21,20 +21,15 @@
 			#region INIT
 			Console.Title = "Tartaros - Init";
 			Init.BuildFilesystem();
-			Thread.Sleep(1000);
 
 			ConfigHandler.Init();
-			Thread.Sleep(1000);
 			#endregion
 
 			#region TEST
 			if (!testModuleSkipped)
 			{
 				Init.CheckCommunications();
-				Thread.Sleep(2000);
-
 				Init.CheckCryptAndEncryption();
-				Thread.Sleep(2000);
 			}
 			#endregion
 
