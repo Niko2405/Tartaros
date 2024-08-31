@@ -8,88 +8,35 @@ namespace Tartaros
 {
 	internal class CommandHandler
 	{
+		public static readonly List<string> CommandList = new()
+		{
+			{"help"},
+			{"info"},
+
+			{"getConfig"},
+			{"runProgram"}
+		};
+
 		public static string ProcessCommand(string InputCommand)
 		{
-			string[] rawCommand = InputCommand.Split(' ');
 			try
 			{
-				#region HELP
-				if (rawCommand[0] == "help" && rawCommand.Length == 1)
+				string[] rawCommand = [];
+				if (InputCommand.Contains(' '))
 				{
-					return "No help";
+					rawCommand = InputCommand.Split(' ');
 				}
-				#endregion
 
-				#region INFO
-				if (rawCommand[0] == "info")
-				{
-					return "No info";
-				}
-				#endregion
-
-				#region CLEAR
-				if (rawCommand[0] == "clear")
-				{
-					Console.Clear();
-					return string.Empty;
-				}
-				#endregion
-
-				#region RUN
-				if (rawCommand[0] == "run")
-				{
-					if (rawCommand.Length == 1)
-					{
-						return "Available options:\nrun program [program]";
-					}
-					if (rawCommand[1] == "program")
-					{
-						if (rawCommand.Length == 2)
-					{
-						return "Available programs:\n-> testmodule\n-> serialcontrol";
-					}
-						if (rawCommand[2] == "testmodule")
-						{
-							Init.CheckCommunications();
-							Init.CheckCryptAndEncryption();
-							return string.Empty;
-						}
-						if (rawCommand[2] == "serialcontrol")
-						{
-							
-						}
-					}
-				}
-				#endregion
-
-				#region SET
-				if (rawCommand[0] == "set")
-				{
-					
-				}
-				#endregion
-
-				#region GET
-				if (rawCommand[0] == "get")
-				{
-					if (rawCommand.Length == 1)
-					{
-						return "Available options:\nget config";
-					}
-					if (rawCommand[1] == "config")
-					{
-						return File.ReadAllText(ConfigHandler.CONFIG_FILE);
-					}
-				}
-				#endregion
-
-				Logger.PrintStatus("No command found", Logger.StatusCode.FAILED);
-				return string.Empty;
+				// Commands with none args
+				if ()
 			}
-			catch (IndexOutOfRangeException)
+			catch (System.Exception)
 			{
-				return string.Empty;
+				
+				throw;
 			}
+			Logger.PrintStatus("Command not found", Logger.StatusCode.INFO);
+			return string.Empty;
 		}
 	}
 }
