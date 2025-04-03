@@ -5,5 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Tartaros.MainWindow"
         Title="Tartaros">
-    Welcome to Avalonia!
+    <StackPanel>
+        
+    </StackPanel>
 </Window>
