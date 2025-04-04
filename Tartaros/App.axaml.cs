@@ -15,10 +15,8 @@ namespace Tartaros
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                //desktop.MainWindow = new MainWindow();
-                desktop.MainWindow = new LoginWindow();
+                desktop.MainWindow = new MainWindow();
             }
-
             base.OnFrameworkInitializationCompleted();
         }
     }

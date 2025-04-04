@@ -7,6 +7,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Assets\Gothica-Bold.ttf" />
+    <None Remove="Assets\Gothica-BoldOblique.ttf" />
+    <None Remove="Assets\Gothica-Book.ttf" />
+    <None Remove="Assets\Gothica-BookOblique.ttf" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.2.6" />
@@ -21,5 +27,12 @@
     <PackageReference Include="Serilog" Version="4.2.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\Fonts\Gothica-Bold.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Gothica-BoldOblique.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Gothica-Book.ttf" />
+    <AvaloniaResource Include="Assets\Fonts\Gothica-BookOblique.ttf" />
   </ItemGroup>
 </Project>

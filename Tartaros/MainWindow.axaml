@@ -1,11 +1,58 @@
 <Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="Tartaros.MainWindow"
-        Title="Tartaros">
-    <StackPanel>
-        
-    </StackPanel>
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+		Width="1280"
+		Height="720"
+		x:Class="Tartaros.MainWindow"
+		
+		Title="Tartaros">
+	<DockPanel>
+		<Grid Background="Bisque">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+				<ColumnDefinition></ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+				<RowDefinition></RowDefinition>
+			</Grid.RowDefinitions>
+			<StackPanel Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Background="RosyBrown">
+				<Label Content="Tartaros"></Label>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition></ColumnDefinition>
+						<ColumnDefinition></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+						<RowDefinition></RowDefinition>
+					</Grid.RowDefinitions>
+
+					<!-- Username -->
+					<Label Grid.Column="0" Grid.Row="0" FontFamily="{StaticResource Gothica}" FontStyle="Oblique" VerticalContentAlignment="Center" Content="Username:"></Label>
+					<TextBox Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10" Text=""></TextBox>
+					
+					<!-- Password -->
+					<Label Grid.Column="0" Grid.Row="1" VerticalContentAlignment="Center" Content="Password:"></Label>
+					<TextBox Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10" Text=""></TextBox>
+
+					<!-- Server -->
+					<Label Grid.Column="0" Grid.Row="2" VerticalContentAlignment="Center" Content="Server:"></Label>
+					<TextBox Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="10" Text="127.0.0.1"></TextBox>
+				</Grid>
+			</StackPanel>
+		</Grid>
+	</DockPanel>
 </Window>
