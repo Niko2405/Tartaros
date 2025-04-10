@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Client": {
+      "commandName": "Project",
+      "commandLineArgs": "--client"
+    },
+    "Server": {
+      "commandName": "Project",
+      "commandLineArgs": "--server"
+    }
+  }
+}

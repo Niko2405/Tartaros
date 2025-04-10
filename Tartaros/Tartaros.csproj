@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="TLogger">
+      <HintPath>..\..\Tartaros-Logger\TLogger\bin\Release\net9.0\TLogger.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
