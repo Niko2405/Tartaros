@@ -3,7 +3,7 @@ using TLogger;
 
 namespace TartarosServer;
 
-public class ConfigHandler
+internal class ConfigHandler
 {
 	public static Serial? serialConfig;
 	public static Network? networkConfig;
@@ -41,11 +41,14 @@ public class ConfigHandler
 		try
 		{
 			serialConfig = JsonSerializer.Deserialize<Serial>(File.ReadAllText(FILE_CONFIG_SERIAL), JsonOptions);
+			Console.WriteLine(FILE_CONFIG_SERIAL + System.Environment.NewLine + File.ReadAllText(FILE_CONFIG_SERIAL));
+			
 			networkConfig = JsonSerializer.Deserialize<Network>(File.ReadAllText(FILE_CONFIG_NETWORK), JsonOptions);
+			Console.WriteLine(FILE_CONFIG_NETWORK + System.Environment.NewLine + File.ReadAllText(FILE_CONFIG_NETWORK));
 		}
 		catch (Exception e)
 		{
-			Logger.Error(e.Message);
+			Logger.Error("ConfigHandler: " + e.Message);
 		}
 	}
 }

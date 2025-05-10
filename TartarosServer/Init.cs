@@ -3,7 +3,7 @@ using TLogger;
 
 namespace TartarosServer;
 
-public class Init
+internal class Init
 {
 	private static void CheckLogger()
 	{
@@ -36,6 +36,19 @@ public class Init
 	private static void CheckConfigs()
 	{
 		ConfigHandler.Load();
+		if (ConfigHandler.serialConfig != null)
+		{
+			Logger.Info("Serial Config loaded");
+		}
+		if (ConfigHandler.networkConfig != null)
+		{
+			Logger.Info("Network Config loaded");
+		}
+	}
+
+	private static void CheckDatabase()
+	{
+		Database.Test();
 	}
     
 	public static void Start()
@@ -44,5 +57,6 @@ public class Init
 		CheckLogger();
 		CheckFilesystem();
 		CheckConfigs();
+		CheckDatabase();
 	}
 }

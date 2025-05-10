@@ -20,6 +20,5 @@ class Program
 			}
 		}
 		Init.Start();
-		Logger.Info(ConfigHandler.serialConfig.BaudRate.ToString());
 	}
 }
