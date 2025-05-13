@@ -46,6 +46,8 @@ internal class Database
 					Logger.Error("Database Test: FAILED");
 				}
 			}
+			reader.Close();
+			sqlCommand.Dispose(); // very important for windows systems
 			connection.Close();
 		
 			// Drop DB
@@ -54,7 +56,6 @@ internal class Database
 		catch (Exception e)
 		{
 			Logger.Error(e.Message);
-			throw;
 		}
 	}
 }
