@@ -146,6 +146,7 @@
 			buttonLogin.TabIndex = 5;
 			buttonLogin.Text = "Login";
 			buttonLogin.UseVisualStyleBackColor = false;
+			buttonLogin.Click += buttonLogin_Click;
 			// 
 			// textBoxPassword
 			// 
@@ -196,6 +197,8 @@
 			Name = "Login";
 			StartPosition = FormStartPosition.CenterScreen;
 			Text = "Tartaros - Login";
+			FormClosed += Login_FormClosed;
+			Load += Login_Load;
 			tableLayoutPanel.ResumeLayout(false);
 			panelLogin.ResumeLayout(false);
 			panelLogin.PerformLayout();

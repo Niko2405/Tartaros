@@ -1,24 +1,25 @@
 using System.Diagnostics;
+using TLogger;
 
 namespace TartarosC
 {
-    public partial class Login : Form
-    {
-        private Size formOriginalSize;
+	public partial class Login : Form
+	{
+		private Size formOriginalSize;
 
-        private Rectangle boundsTextBoxUsername;
+		private Rectangle boundsTextBoxUsername;
 		private Rectangle boundsTextBoxPassword;
 		private Rectangle boundsTextBoxServerAddress;
 
-        private Rectangle boundsLabelUsername;
+		private Rectangle boundsLabelUsername;
 		private Rectangle boundsLabelPassword;
 		private Rectangle boundsLabelServer;
 
-        private Rectangle boundsButtonLogin;
+		private Rectangle boundsButtonLogin;
 
 		public Login()
-        {
-            InitializeComponent();
+		{
+			InitializeComponent();
 			this.Resize += Login_Resize;
 			formOriginalSize = this.Size;
 
@@ -62,6 +63,34 @@ namespace TartarosC
 			Debug.WriteLine("========= RESIZED =========");
 			Debug.WriteLine($"Set {control.GetType().Name} to location [X:{newX} | Y:{newY}]");
 			Debug.WriteLine($"Set {control.GetType().Name} to size [Width:{newWidth} | Heigth:{newHeigth}]");
+		}
+
+		private void buttonLogin_Click(object sender, EventArgs e)
+		{
+			string username = (string)textBoxUsername.Text;
+			string password = (string)textBoxPassword.Text;
+			string serverAddress = (string)textBoxServerAddress.Text;
+
+			if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(serverAddress))
+			{
+				Logger.Warn("Input incorrect");
+				return;
+			}
+			ClientSocket.Username = username;
+			ClientSocket.Password = password;
+			ClientSocket.ServerAddress = serverAddress;
+			this.Hide();
+			new MainForm().Show();
+		}
+
+		private void Login_Load(object sender, EventArgs e)
+		{
+			this.TopMost = true;
+		}
+
+		private void Login_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			Environment.Exit(0);
 		}
 	}
 }
